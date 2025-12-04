@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HaloLight Netlify
 
-## Getting Started
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![Netlify](https://img.shields.io/badge/Netlify-Deployed-00C7B7.svg?logo=netlify)](https://halolight-netlify.h7ml.cn)
+[![Next.js](https://img.shields.io/badge/Next.js-15-%23000000.svg)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-%233178C6.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-%2361DAFB.svg)](https://react.dev/)
 
-First, run the development server:
+HaloLight 后台管理系统的 **Netlify 部署版本**，基于 Next.js 15 App Router + React 19 构建，集成 Netlify Edge Functions、Forms 和 Identity。
+
+- 在线预览：<https://halolight-netlify.h7ml.cn>
+- GitHub：<https://github.com/halolight/halolight-netlify>
+
+## 功能亮点
+
+- **Netlify Edge Functions**：Deno 运行时，边缘计算
+- **Netlify Forms**：无后端表单处理
+- **Netlify Identity**：内置用户认证
+- **Deploy Previews**：PR 自动预览
+- **Split Testing**：A/B 测试支持
+- **Background Functions**：后台任务处理
+
+## 快速开始
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 克隆仓库
+git clone https://github.com/halolight/halolight-netlify.git
+cd halolight-netlify
+
+# 安装依赖
+pnpm install
+
+# 本地开发
 pnpm dev
-# or
-bun dev
+
+# 使用 Netlify CLI 本地预览
+netlify dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 部署到 Netlify
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 方式一：Git 集成
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. 在 [Netlify Dashboard](https://app.netlify.com/start) 导入项目
+2. 配置构建命令：`pnpm build`
+3. 发布目录：`.next`
 
-## Learn More
+### 方式二：Netlify CLI
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# 安装 CLI
+pnpm add -g netlify-cli
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# 登录并部署
+netlify login
+netlify deploy --prod
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Netlify 配置
 
-## Deploy on Vercel
+### netlify.toml
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```toml
+[build]
+  command = "pnpm build"
+  publish = ".next"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[edge_functions]]
+  path = "/api/*"
+  function = "api-handler"
+```
+
+## 环境变量
+
+| 变量名 | 说明 |
+|--------|------|
+| `NEXT_PUBLIC_API_URL` | API 基础地址 |
+| `NETLIFY_AUTH_TOKEN` | Netlify API Token |
+
+## 相关链接
+
+- [HaloLight 文档](https://halolight.docs.h7ml.cn)
+- [Netlify 文档](https://docs.netlify.com/)
+- [Netlify Next.js Runtime](https://docs.netlify.com/frameworks/next-js/)
+
+## 许可证
+
+[MIT](LICENSE)
