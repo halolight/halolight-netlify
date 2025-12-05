@@ -86,8 +86,8 @@ netlify deploy --prod
 ## 相关链接
 
 - [HaloLight 文档](https://halolight.docs.h7ml.cn)
-- [Netlify 文档](https://docs.netlify.com/)
-- [Netlify Next.js Runtime](https://docs.netlify.com/frameworks/next-js/)
+- [Netlify 文档](https:/docs.netlify.com/)
+- [Netlify Next.js Runtime](https:/docs.netlify.com/frameworks/next-js/)
 
 ## 许可证
 
